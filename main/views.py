@@ -1,10 +1,9 @@
-from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
 from django.http import JsonResponse
+from .serializers import CategorySerializer
+from .models import Category
 
-class Prova(APIView):
-
-    permission_classes = [AllowAny, ]
-
-    def get(self, request, format = None):
-        return JsonResponse({'ciao':'ciao'})
+class CategoryHandler(ModelViewSet):
+    serializer_class = CategorySerializer
+    queryset = Category.objects.all()
