@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
@@ -18,7 +20,7 @@ class Topic(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{} {}".format(self.name, self.category.__str__())
+        return "{} - {}".format(self.name, self.category.__str__())
 
 
 class User(models.Model):
@@ -41,7 +43,10 @@ class Tutorial(models.Model):
     author_img = models.URLField()
     last_updated = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True)
+    topic = models.ForeignKey(
+        Topic, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return "{}".format(self.title)
