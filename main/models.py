@@ -7,11 +7,19 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
 
+    def __str__(self):
+        return "{}".format(self.name)
+
+
 class Topic(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     img = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "{} {}".format(self.name, self.category.__str__())
+
 
 class User(models.Model):
     email = models.EmailField()
@@ -19,6 +27,10 @@ class User(models.Model):
     is_verified = models.BooleanField(default=False)
     is_anonymous = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "{} {}".format(self.email, self.username)
+
 
 class Tutorial(models.Model):
     title = models.CharField(max_length=255)
@@ -30,3 +42,6 @@ class Tutorial(models.Model):
     last_updated = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return "{}".format(self.title)
