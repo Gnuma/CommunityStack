@@ -15,6 +15,14 @@ class TopicHandler(ModelViewSet):
     queryset = Topic.objects.all()
 
     def list(self, request, *args, **kwargs):
-        self.queryset = Topic.objects.filter(category = kwargs['pk'])
+        self.queryset = Topic.objects.filter(category=kwargs['pk'])
         return super().list(self, request, *args, **kwargs)
-        
+
+
+class TutorialHandler(ModelViewSet):
+    serializer_class = TutorialSerializer
+    queryset = Topic.objects.all()
+
+    def list(self, request, *args, **kwargs):
+        self.queryset = Tutorial.objects.filter(topic=kwargs['pk'])
+        return super().list(self, request, *args, **kwargs)
