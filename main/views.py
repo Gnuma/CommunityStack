@@ -1,8 +1,8 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
 from django.http import JsonResponse
-from .serializers import CategorySerializer, TopicSerializer
-from .models import Category, Topic
+from .serializers import CategorySerializer, TopicSerializer, TutorialSerializer
+from .models import Category, Topic, Tutorial
 
 
 class CategoryHandler(ModelViewSet):
