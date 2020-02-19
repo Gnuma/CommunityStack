@@ -26,6 +26,8 @@ class Topic(models.Model):
 class User(models.Model):
     email = models.EmailField()
     username = models.CharField(max_length=255)
+    contributions = models.IntegerField(blank = True, default = 0)
+    last_contribution = models.DateTimeField(blank = True, auto_now_add = True)
     is_verified = models.BooleanField(default=False)
     is_anonymous = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
