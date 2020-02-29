@@ -2,9 +2,11 @@ from django.urls import path
 from rest_framework.routers import DefaultRouter
 from .utils.custom_routers import RetrieveByCategoryRouter, RetrieveByTopicRouter
 from .views import CategoryHandler, TopicHandler, TutorialHandler
+from .user_management.views import UserHandler
 
 router = DefaultRouter()
 router.register('categories', CategoryHandler)
+router.register('topic', TopicHandler)
 router.register('users', UserHandler)
 category = RetrieveByCategoryRouter()
 category.register('topics', TopicHandler)
