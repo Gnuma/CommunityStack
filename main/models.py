@@ -24,8 +24,8 @@ class Topic(models.Model):
 
 
 class User(models.Model):
-    email = models.EmailField()
-    username = models.CharField(max_length=255)
+    email = models.EmailField(unique = True)
+    username = models.CharField(max_length=255, unique = True)
     contributions = models.IntegerField(blank = True, default = 0)
     last_contribution = models.DateTimeField(blank = True, auto_now_add = True)
     is_verified = models.BooleanField(default=False)
@@ -37,11 +37,11 @@ class User(models.Model):
 
 
 class Tutorial(models.Model):
-    title = models.CharField(max_length=255)
-    abstract = models.CharField(max_length=255)
-    time_reading = models.IntegerField()
+    title = models.CharField(max_length=255, blank = True, default = "")
+    abstract = models.CharField(max_length=255, blank = True, default = "")
+    time_reading = models.IntegerField(blank = True, default = 0)
     link = models.URLField()
-    author_name = models.CharField(max_length=255)
+    author_name = models.CharField(max_length=255, blank = True, default = "")
     author_img = models.URLField()
     last_updated = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -49,6 +49,7 @@ class Tutorial(models.Model):
         User, on_delete=models.SET_NULL, null=True, blank=True)
     topic = models.ForeignKey(
         Topic, on_delete=models.SET_NULL, null=True, blank=True)
+    enabled = models.BooleanField(default = False, blank = True)
 
     def __str__(self):
-        return "{}".format(self.title)
+        return "{} {}".format(self.title, self.link)
