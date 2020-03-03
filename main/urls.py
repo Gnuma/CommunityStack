@@ -6,6 +6,7 @@ from .user_management import UserHandler
 
 router = DefaultRouter()
 router.register('categories', CategoryHandler)
+router.register('topic', TopicHandler)
 router.register('users', UserHandler)
 category = RetrieveByCategoryRouter()
 category.register('topics', TopicHandler)
